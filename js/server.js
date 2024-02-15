@@ -1,67 +1,25 @@
+const express = require('express');
 const http = require('http');
-const https = require('https');
-const url = require('url');
+const path = require('path');
 
-const PORT = process.env.PORT || 3000;
-const OMDB_API_KEY = 'b86ad24a';
+const app = express();
+const PORT = 3111;
 
-const server = http.createServer((req, res) => {
-    const parsedUrl = url.parse(req.url, true);
-    const { pathname, query } = parsedUrl;
+// Définir le chemin vers le répertoire des fichiers statiques
+const staticPath = path.join(__dirname, '..', 'AdopteUnFilm', 'dist', 'adopte-un-film','browser');
 
-    // Vérifier si la requête est pour récupérer les données de l'API OMDB
-    if (pathname === '/movies') {
-        // Construire l'URL de l'API OMDB
-        const searchTerm = query.s || 'avatar_2';
-        const page = query.page || 1;
-        const omdbUrl = `https://www.omdbapi.com/?s=${searchTerm}&page=${page}&apiKey=${OMDB_API_KEY}`;
+// Servir les fichiers statiques
+app.use(express.static(staticPath));
 
-        // Effectuer une requête à l'API OMDB
-        https.get(omdbUrl, (omdbRes) => {
-            let data = '';
-
-            // Recevoir les données de l'API OMDB
-            omdbRes.on('data', (chunk) => {
-                data += chunk;
-            });
-
-            // Une fois les données reçues, envoyer la réponse au client
-            omdbRes.on('end', () => {
-                res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(data);
-            });
-        }).on('error', (err) => {
-            console.error('Error fetching data from OMDB API:', err);
-            res.writeHead(500);
-            res.end('Internal Server Error');
-        });
-    } else {
-        // Si la requête n'est pas pour récupérer les données de l'API OMDB, renvoyer une page HTML simple
-        res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.end(`
-            <html>
-            <head><title>OMDB Movies</title></head>
-            <body>
-                <h1>OMDB Movies</h1>
-                <img id="movieThumbnail" src="" alt="Movie Thumbnail">
-                <script>
-                    // Effectuer une requête vers le serveur pour récupérer les données de l'API OMDB
-                    fetch('/movies')
-                        .then(response => response.json())
-                        .then(data => {
-                            // Extraire l'URL de la vignette du premier film trouvé
-                            const movieThumbnailUrl = data.Search[0].Poster;
-                            // Afficher la vignette dans l'image
-                            document.getElementById('movieThumbnail').src = movieThumbnailUrl;
-                        })
-                        .catch(error => console.error('Error fetching movies:', error));
-                </script>
-            </body>
-            </html>
-        `);
-    }
+// Définir la route par défaut pour servir index.html
+app.get('/', (req, res) => {
+    res.sendFile(path.join(staticPath, 'index.html'));
 });
 
+// Créer un serveur HTTPS sans certificat
+const server = http.createServer(app);
+
+// Démarrer le serveur HTTPS
 server.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log('HTTPS server is running on port', PORT);
 });
