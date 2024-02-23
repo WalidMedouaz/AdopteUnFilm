@@ -1,0 +1,17 @@
+<h1>{{title}}</h1>
+<img src="https://image.tmdb.org/t/p/w500{{posterPath}}" alt="Poster">
+
+<div>
+    <button (click)="toggleVideoAndResume()">Afficher le trailer et le résumé</button>
+    <div *ngIf="showVideoAndResume">
+        <div *ngIf="videoUrl">
+            <h3>Trailer</h3>
+            <iframe width="560" height="315" [src]="videoUrl" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div *ngIf="overview">
+            <h3>Résumé</h3>
+            <p>{{ overview }}</p>
+        </div>
+    </div>
+</div>
+
