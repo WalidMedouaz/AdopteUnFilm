@@ -4,6 +4,11 @@ import axios from 'axios';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
+interface Film {
+  id: number;
+  posterPath: string;
+}
+
 @Component({
   selector: 'app-films',
   standalone: true,
@@ -12,6 +17,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   styleUrl: './films.component.css'
 })
 export class FilmsComponent implements OnInit {
+  films: Film[] = [];
   title = '';
   posterPath: any;
   overview: string = '';
@@ -41,6 +47,18 @@ export class FilmsComponent implements OnInit {
                 console.log('Overview:', overview);
                 this.title = title;
                 this.posterPath = poster_path;
+
+                for (let i = this.films.length; i >= 0; i--) {
+                  // Décaler chaque film vers la droite dans le tableau
+                  this.films[i] = this.films[i - 1];
+                }
+                // Ajouter le nouveau film à la première position
+                this.films[0] = { id, posterPath: poster_path };
+                if (this.films.length > 4) {
+                  this.films.pop(); // Supprimer le dernier film s'il y en a plus de 4
+                }
+
+                console.log(this.films);
 
                 this.fetchVideos(film);
             }
@@ -84,10 +102,8 @@ export class FilmsComponent implements OnInit {
   }
 
   fetchOverview(film: any) {
-    console.log("gneh: ",film.overview);
     const overview = film.overview;
     this.overview = overview;
-    console.log("bébé: ",this.overview);
   }
 
   toggleVideoAndResume() {
