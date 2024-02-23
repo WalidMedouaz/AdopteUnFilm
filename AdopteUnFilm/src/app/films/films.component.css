@@ -1,0 +1,14 @@
+.previous-films {
+    display: flex;
+    justify-content: space-between;
+}
+
+.previous-film {
+    flex: 0 0 auto;
+    width: 30%; /* Ajustez la taille des vignettes selon vos préférences */
+    margin-right: 10px; /* Ajoutez une marge entre les vignettes */
+}
+
+.previous-film img {
+    width: 100%; /* Pour s'assurer que l'image remplit son conteneur */
+}
