@@ -1,13 +1,105 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <title>AdopteUnFilm</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Swiper</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+  <style>
+    .youtube-container {
+      display: none;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+    }
+
+    .youtube-container iframe {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
 </head>
+
 <body>
-  <app-root></app-root>
+
+  <ion-icon id="dislike" name="heart-dislike" onclick="dislike()"></ion-icon>
+  <div class="container">
+
+    <div class="swiper Slider-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" id="card1" onclick="showYoutube('RNKFKDs5SGk')">
+          <img src="https://fr.web.img4.acsta.net/pictures/23/01/03/15/53/0336388.jpg" alt="Slide Image" />
+        </div>
+        <div class="swiper-slide" id="card2" onclick="showYoutube('RNKFKDs5SGk')">
+          <img src="https://fr.web.img4.acsta.net/pictures/23/01/03/15/53/0336388.jpg" alt="Slide Image" />
+        </div>
+        <div class="swiper-slide" id="card3" onclick="showYoutube('RNKFKDs5SGk')">
+          <img src="https://fr.web.img4.acsta.net/pictures/23/01/03/15/53/0336388.jpg" alt="Slide Image" />
+        </div>
+        <div class="swiper-slide" id="card4" onclick="showYoutube('RNKFKDs5SGk')">
+          <img src="https://fr.web.img4.acsta.net/pictures/23/01/03/15/53/0336388.jpg" alt="Slide Image" />
+        </div>
+      </div>
+    </div>
+    <h1 class="heading">Asterix et Obelix</h1>
+  </div>
+  <ion-icon id="like" name="heart" onclick="like()"></ion-icon>
+
+  <!-- Container for YouTube integration -->
+  <div class="youtube-container" id="youtubeContainer">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/videoId" frameborder="0" allowfullscreen></iframe>
+  </div>
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+  <script>
+    var youtubeContainer = document.getElementById('youtubeContainer');
+    var youtubeIframe = document.querySelector('.youtube-container iframe');
+
+    var swiper = new Swiper('.Slider-container', {
+      effect: 'cards',
+      grabCursor: false,
+      centerdSlides: false,
+      loop: false,
+    });
+
+    function like() {
+      swiper.slideNext(550);
+      hideYoutube();
+    }
+
+    function dislike() {
+      swiper.slidePrev(550);
+      hideYoutube();
+    }
+
+    function showYoutube(videoId) {
+      if (youtubeContainer.style.display === 'block') {
+        hideYoutube();
+      } else {
+        youtubeContainer.style.display = 'block';
+        youtubeContainer.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+        youtubeIframe.src = `https://www.youtube.com/embed/${videoId}`;
+      }
+    }
+
+    function hideYoutube() {
+      youtubeContainer.style.display = 'none';
+      youtubeIframe.src = '';
+    }
+  </script>
+
 </body>
+
 </html>
