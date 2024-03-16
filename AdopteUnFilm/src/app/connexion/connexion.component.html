@@ -1,0 +1,24 @@
+<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 999; width: 100%;">
+    <!-- Formulaire de connexion -->
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-8 col-md-10 col-sm-12">
+            <h2 class="text-center mb-5 fs-1 text-white">Connexion</h2>
+            <form method="POST" action="https://pedago.univ-avignon.fr:3111/">
+                <!-- Identifiant -->
+                <div class="mb-4">
+                    <label for="username" class="form-label fs-1 text-white">Identifiant</label>
+                    <input type="text" class="form-control form-control-lg" id="username" name="username"
+                        [(ngModel)]="username" placeholder="Entrez votre identifiant" required>
+                </div>
+                <!-- Mot de passe -->
+                <div class="mb-4">
+                    <label for="password" class="form-label fs-1 text-white">Mot de passe</label>
+                    <input type="password" class="form-control form-control-lg" id="password" name="password" [(ngModel)]="password"
+                        placeholder="Entrez votre mot de passe" required>
+                </div>
+                <!-- Bouton -->
+                <button type="submit" (click)="connexion()" class="btn btn-primary btn-lg btn-block fs-5">Se Connecter</button>
+            </form>
+        </div>
+    </div>
+</div>

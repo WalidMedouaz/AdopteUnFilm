@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url("bootstrap.min.css");
 * {
     margin: 0;
     padding: 0;
@@ -21,7 +22,7 @@
     background-repeat: no-repeat;
   }
 
-  #like,
+  /* #like,
   #dislike {
     font-size: 16vh;
     border-radius: 50%;
@@ -33,8 +34,25 @@
     animation-duration: 1s;
     animation-timing-function: ease-in-out;
     animation-fill-mode: both;
-    /* don't run animation at the beginning */
     animation-play-state: paused;
+  } */
+
+  .dislike {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    left: 170px; /* Ajustez la position horizontale de l'image "coeur-brise.png" */
+    top: 50%; /* Centrez l'image verticalement */
+    transform: translateY(-50%);
+  }
+  
+  .like {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    right: 170px; /* Ajustez la position horizontale de l'image "coeur.png" */
+    top: 50%; /* Centrez l'image verticalement */
+    transform: translateY(-50%);
   }
   
   #like.trigger,
@@ -87,9 +105,16 @@ body {
 }
 
 .heading {
-  padding-top: 3rem;
-  text-align: center;
-  color: white;
+  position: absolute;
+  top: 0;
+  left: 50%; /* Pour centrer horizontalement */
+  transform: translateX(-50%); /* Pour centrer horizontalement */
+  background-color: rgba(0, 0, 0, 0.25); /* Pour rendre le fond semi-transparent */
+  padding: 10px; /* Espacement autour du texte */
+  text-align: center; /* Centrer le texte */
+  color: white; /* Couleur du texte */
+  width: 100%; /* Ajuster la largeur au conteneur parent */
+  box-sizing: border-box; /* Inclure le padding dans la largeur */
 }
 
 .youtube-container {
@@ -98,14 +123,95 @@ body {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 50%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.9);
   z-index: 1000;
+  animation: scrollUp 0.5s forwards; /* Animation de défilement vers le haut */
+}
+
+.youtube-container.show {
+  display: block;
+}
+
+.bonjour-text{
+  margin-right: 575px;
+}
+
+@keyframes scrollUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.hide-scroll {
+  overflow: hidden;
+}
+
+.hidden {
+  background-color: red;
+  display: none;
 }
 
 .youtube-container iframe {
   width: 100%;
   height: 100%;
+}
+
+.close-button {
+  position: absolute;
+  top: 0%; /* Centrage vertical */
+  left: 50%; /* Centrage horizontal */
+  transform: translate(-50%, -50%); /* Correction pour centrer le bouton */
+  width: 50px;
+  height: 50px;
+  margin-top: 30px;
+}
+
+.close-buttoninscription {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: transparent;
+  border: none;
+  color: #00008B;
+  cursor: pointer;
+}
+
+.close-buttoninscription i {
+  margin-right: 5px;
+}
+
+.content-wrapper {
+    display: flex;
+}
+
+.text-structure {
+    max-height: 700px;
+    margin-top: 100px;
+    margin-left: 10px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.text-content {
+  color: white;
+}
+
+.video-content {
+  flex: 3; /* Augmentez la valeur de flex pour donner plus de place à la vidéo */
+  width: 400px;
+  margin-right: 20px;
+  margin-left: 20px;
+  margin-top: 70px;
+  height: 600px;
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
 }
 
 
@@ -123,5 +229,185 @@ body {
   width: 100%;
   object-fit: cover;
   border-radius: 18px;
+}
+
+.deconnexion-button{
+  position: absolute; 
+  top: 10px; 
+  left: 10px;
+}
+
+.custom-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.userInfo-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.userInfo-content {
+  max-width: 800px; /* Ajustez la largeur maximale du contenu selon vos besoins */
+  padding: 20px;
+  margin-top: 50px;
+  background-color: #ffffff; /* Ajoutez une couleur de fond si nécessaire */
+  border-radius: 10px; /* Ajoutez une bordure arrondie si nécessaire */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Ajoutez une ombre si nécessaire */
+}
+
+.userInfo-content h2 {
+  font-size: 1.5rem; /* Taille de police pour le titre */
+  margin-bottom: 15px; /* Espacement sous le titre */
+}
+
+.userInfo-content p {
+  font-size: 1rem; /* Taille de police pour les paragraphes */
+  margin-bottom: 10px; /* Espacement entre les paragraphes */
+}
+
+.userInfo-content img {
+  max-width: 100%; /* Pour éviter que l'image ne dépasse la largeur du conteneur */
+  display: block; /* Pour centrer l'image horizontalement */
+  margin: 0 auto; /* Pour centrer l'image horizontalement */
+  margin-top: 15px; /* Espacement au-dessus de l'image */
+}
+
+.nav-link.hovered {
+  cursor: pointer; /* Changer le curseur en une main */
+}
+
+/* inscription-message.component.css */
+.inscription-message {
+  text-align: center;
+  margin-top: 150px;
+  font-size: 18px;
+  color: #333;
+}
+
+.inscription-message a {
+  color: #007bff; /* Couleur du lien */
+  cursor: pointer; /* Curseur de la souris en forme de main */
+  margin-top: 150px;
+}
+
+/* inscription-form.component.css */
+.inscription-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  width: 100%;
+}
+
+#filmsContainer {
+  margin-top: 50px;
+}
+
+@media only screen and (max-width: 447px) {
+  .container {
+      flex-direction: row;
+      justify-content: space-around;
+  }
+
+  .heading {
+    position: absolute;
+    top: 0;
+    left: 50%; /* Pour centrer horizontalement */
+    transform: translateX(-50%); /* Pour centrer horizontalement */
+    background-color: rgba(0, 0, 0, 0.25); /* Pour rendre le fond semi-transparent */
+    padding: 10px; /* Espacement autour du texte */
+    text-align: center; /* Centrer le texte */
+    color: white; /* Couleur du texte */
+    width: 100%; /* Ajuster la largeur au conteneur parent */
+    box-sizing: border-box; /* Inclure le padding dans la largeur */
+    font-size: 14px; /* Taille de police réduite */
+  }
+
+  .bonjour-text{
+    margin-right: 60px;
+  }
+
+  .swiper {
+    position: relative;
+    width: 300px;
+    height: 380px;
+  }
+
+  .swiper-slide {
+      width: 200px; /* Or adjust as needed */
+      margin-bottom: 0;
+  }
+
+  .dislike {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    left: 80px; /* Ajustez la position horizontale de l'image "coeur-brise.png" */
+    top: 575px; /* Centrez l'image verticalement */
+    transform: translateY(-50%);
+  }
+  
+  .like {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    right: 80px; /* Ajustez la position horizontale de l'image "coeur.png" */
+    top: 575px; /* Centrez l'image verticalement */
+    transform: translateY(-50%);
+  }
+
+  .content-wrapper {
+    flex-direction: column; /* Changez la direction du flexbox pour empiler les éléments */
+    align-items: center; /* Centrez horizontalement les éléments */
+    justify-content: center; /* Centrez verticalement les éléments */
+  }
+
+
+  .text-structure {
+    max-height: 300px;
+    margin-bottom: 10px;
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  .video-content {
+    flex: 3; /* Augmentez la valeur de flex pour donner plus de place à la vidéo */
+    max-width: 400px;
+    max-height: 300px;
+    width: 400px;
+    height: 300;
+  }
+
+  .deconnexion-button{
+    position: fixed;
+    top: 95%;
+    bottom: 10px;
+    left: 40%;
+  }
+
+  /* inscription-message.component.css */
+  .inscription-message {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 18px;
+    color: #333;
+  }
+
+  .inscription-message a {
+    color: #007bff; /* Couleur du lien */
+    cursor: pointer; /* Curseur de la souris en forme de main */
+    margin-top: 15px;
+  }
+
+  #filmsContainer {
+    margin-top: -70px;
+  }
 }
 

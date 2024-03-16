@@ -1,1 +1,14 @@
-<app-films></app-films>
+<app-navbar [username]="username" *ngIf="notification.includes('Connexion réussie !')"></app-navbar>
+<p class="inscription-message text-white" *ngIf="!notification.includes('Connexion réussie !') && !showInscription">Pas encore inscrit ? <a (click)="toggleInscription()" style="color: #00008B;">Clique ici</a></p>
+<app-connexion *ngIf="!notification.includes('Connexion réussie !') && !showInscription"></app-connexion>
+
+<app-films [username]="username"></app-films>
+
+<app-user-info [showUserInfo]="showUserInfo" *ngIf="showUserInfo"></app-user-info>
+
+<button class="close-buttoninscription text-white" *ngIf="showInscription" (click)="toggleInscription()">
+    <fa-icon [icon]="['fas', 'arrow-left']"></fa-icon> Fermer
+  </button>
+  
+
+<app-inscription *ngIf="showInscription" (inscriptionComplete)="toggleInscription()"></app-inscription>

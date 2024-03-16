@@ -28,6 +28,7 @@
               "src/styles.css"
             ],
             "scripts": [
+              "./node_modules/swiper/swiper-bundle.js",
               "src/script.js"
             ]
           },
@@ -36,13 +37,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
+                  "maximumWarning": "800kb",
                   "maximumError": "1mb"
                 },
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "2kb",
-                  "maximumError": "8kb"
+                  "maximumError": "15kb"
                 }
               ],
               "outputHashing": "all"

@@ -1,4 +1,4 @@
-
+<div id="filmsContainer">
 <!--<button (click)="fetchFilms()">Générer le prochain film</button>
 <h1>{{title}}</h1>
 <img src="https://image.tmdb.org/t/p/w500{{posterPath}}" alt="Poster">
@@ -25,7 +25,6 @@
 </div>-->
 
 <!-- <button (click)="fetchFilms()">Générer le prochain film</button> -->
-<img id="dislike" src="../coeur-brise.png" onclick="dislike()">
 <!-- <div class="container">
     <div class="swiper Slider-container">
         <div class="swiper-wrapper">
@@ -45,29 +44,40 @@
     </div>    
     <h1 class="heading">{{title}}</h1>
 </div> -->
-<div class="swiper Slider-container">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide" id="card1" (click)="showYoutube(youtubeKey)">
-        <img src="https://image.tmdb.org/t/p/w500{{posterPath}}"  />
-      </div>
-      <div class="swiper-slide" id="card2" (click)="showYoutube('RNKFKDs5SGk')">
-        <img src="https://image.tmdb.org/t/p/w500{{films[1].posterPath}}"  />
-      </div>
-      <div class="swiper-slide" id="card3" (click)="showYoutube('RNKFKDs5SGk')">
-        <img src="https://image.tmdb.org/t/p/w500{{films[2].posterPath}}" />
-      </div>
-      <div class="swiper-slide" id="card4" (click)="showYoutube('RNKFKDs5SGk')">
-        <img src="https://image.tmdb.org/t/p/w500{{films[3].posterPath}}"  />
-      </div>
+<div class="youtube-container" id="youtubeContainer">
+    <img class="close-button" src="https://cdn-icons-png.flaticon.com/512/10610/10610578.png" (click)="hideYoutube()">
+    <div class="content-wrapper">
+        <div class="video-content">
+            <iframe id="youtubeIframe" src="https://www.youtube.com/embed/videoId" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="text-structure">
+            <h2 class="text-content">{{ currentTitle }}</h2><br>
+            <h3 class="text-content">{{ currentOverview }}</h3>
+        </div>
     </div>
-  </div>
-  <h1 class="heading">{{title}}</h1>
-  
-  <!-- Container for YouTube integration -->
-  <div class="youtube-container" id="youtubeContainer">
-    <iframe id="youtubeIframe" width="560" height="315" src="https://www.youtube.com/embed/videoId" frameborder="0" allowfullscreen></iframe>
-  </div>
-  
-  <img id="like" src="../coeur.png" (click)="fetchFilms()">
-
-
+</div>
+<div class="container">
+    <img class="dislike" src="https://i.imgur.com/rWoGrv2.png" (click)="dislike()">
+    <div class="swiper Slider-container swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" id="card1" (click)="showYoutube(films[0].youtubeKey,films[0].title,films[0].overview)">
+                <img src="https://image.tmdb.org/t/p/w500{{films[0].posterPath}}"  />
+                <h1 class="heading">{{films[0].title}}</h1>
+            </div>
+            <div class="swiper-slide" id="card2" (click)="showYoutube(films[1].youtubeKey,films[1].title,films[1].overview)">
+                <img src="https://image.tmdb.org/t/p/w500{{films[1].posterPath}}"  />
+                <h1 class="heading">{{films[1].title}}</h1>
+            </div>
+            <div class="swiper-slide" id="card3" (click)="showYoutube(films[2].youtubeKey,films[2].title,films[2].overview)">
+                <img src="https://image.tmdb.org/t/p/w500{{films[2].posterPath}}" />
+                <h1 class="heading">{{films[2].title}}</h1>
+            </div>
+            <div class="swiper-slide" id="card4" (click)="showYoutube(films[3].youtubeKey,films[3].title,films[3].overview)">
+                <img src="https://image.tmdb.org/t/p/w500{{films[3].posterPath}}" />
+                <h1 class="heading">{{films[3].title}}</h1>
+            </div>
+        </div>
+    </div>
+    <img class="like" src="https://i.imgur.com/vtI4o0L.png" (click)="like(films[0].id)">
+</div>
+</div>
